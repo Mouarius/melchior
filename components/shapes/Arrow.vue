@@ -1,0 +1,21 @@
+<template>
+  <svg
+    width="28"
+    height="30"
+    viewBox="0 0 28 30"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M13.4549 29.0651L25.9812 15.0651L13.4549 1.06506"
+      stroke-width="2"
+    />
+    <line
+      x1="25.9812"
+      y1="15.3282"
+      x2="0.92857"
+      y2="15.3282"
+      stroke-width="2"
+    />
+  </svg>
+</template>
