@@ -25,18 +25,20 @@ $grey-blue: #e7e9f3;
 .container {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: $padding-space auto $padding-space;
-  grid-template-rows: $padding-space auto;
+  grid-template-columns: 0px 1fr 0px;
+  grid-template-rows: 0px auto;
+
   grid-template-areas: 'header header header' '. main .';
   background: $grey-blue;
 }
+
 .central-container {
   width: 100%;
   height: 100%;
   grid-area: main;
 }
 header.page-header {
-  height: calc(100vh - #{$padding-space});
+  height: 100vh;
   background: linear-gradient(
       360deg,
       rgba(27, 42, 70, 0.72) 0%,
@@ -58,18 +60,38 @@ header.page-header {
   h1 {
     font-family: 'Chromate', serif;
     font-weight: 300;
-    font-size: 100px;
+    font-size: 64px;
+
     text-transform: uppercase;
     border-bottom: solid 3px white;
-    line-height: 100px;
+    line-height: 70px;
   }
   h2 {
     margin-top: 10px;
     font-weight: 400;
-    font-size: 40px;
+    font-size: 32px;
   }
   text-align: center;
   display: block;
   color: white;
+}
+@media screen and (min-width: 720px) {
+  .container {
+    grid-template-columns: $padding-space 1fr $padding-space;
+    grid-template-rows: $padding-space auto;
+  }
+  header.page-header {
+    height: calc(100vh - #{$padding-space});
+  }
+  .page-title {
+    h1 {
+      font-size: 90px;
+      line-height: 90px;
+    }
+    h2 {
+      margin-top: 10px;
+      font-size: 40px;
+    }
+  }
 }
 </style>
