@@ -1,63 +1,75 @@
 <template>
   <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">melchior</h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+    <div class="central-container">
+      <header class="page-header">
+        <div class="page-title">
+          <h1>melchior</h1>
+          <h2>boulangerie fictive</h2>
+        </div>
+        <down-button class="down-button" />
+      </header>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+import DownButton from '~/components/DownButton.vue'
+export default {
+  components: { DownButton },
+}
 </script>
 
-<style>
+<style lang="scss">
+$padding-space: 80px;
+$grey-blue: #e7e9f3;
 .container {
-  margin: 0 auto;
   min-height: 100vh;
+  display: grid;
+  grid-template-columns: $padding-space auto $padding-space;
+  grid-template-rows: $padding-space auto;
+  grid-template-areas: 'header header header' '. main .';
+  background: $grey-blue;
+}
+.central-container {
+  width: 100%;
+  height: 100%;
+  grid-area: main;
+}
+header.page-header {
+  height: calc(100vh - #{$padding-space});
+  background: linear-gradient(
+      360deg,
+      rgba(27, 42, 70, 0.72) 0%,
+      rgba(27, 42, 70, 0.17) 100%
+    ),
+    url('~/assets/images/landing-picture.jpeg');
+  background-size: cover;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+}
+.down-button {
+  position: absolute;
+  bottom: calc(#{$padding-space / 2});
+  height: 64px;
+}
+
+.page-title {
+  h1 {
+    font-family: 'Chromate', serif;
+    font-weight: 300;
+    font-size: 100px;
+    text-transform: uppercase;
+    border-bottom: solid 3px white;
+    line-height: 100px;
+  }
+  h2 {
+    margin-top: 10px;
+    font-weight: 400;
+    font-size: 40px;
+  }
   text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
+  color: white;
 }
 </style>
