@@ -17,16 +17,17 @@
           <v-button :arrow="true">COMMANDER </v-button>
         </div>
       </section>
-      <div class="product-list"></div>
+      <products-list></products-list>
     </div>
   </div>
 </template>
 
 <script>
+import ProductsList from '~/components/ProductsList.vue'
 import VButton from '~/components/UI/VButton.vue'
 import VHeader from '~/components/VHeader.vue'
 export default {
-  components: { VButton, VHeader },
+  components: { VButton, VHeader, ProductsList },
 }
 </script>
 
@@ -84,6 +85,9 @@ $grey-blue: #e7e9f3;
     font-weight: normal;
     font-style: normal;
   }
+}
+section {
+  background: white;
 }
 @media screen and (min-width: 768px) {
   section {
