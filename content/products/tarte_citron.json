@@ -1,8 +1,8 @@
 {
-  "id": "tarte_fraises",
-  "title": "Tarte aux fraises",
-  "subtitle": "Un délice de fruits frais",
-  "image": "tarte_fraises.jpeg",
+  "id": "tarte_citron",
+  "title": "Tarte au citron",
+  "subtitle": "Acidulée juste ce qu'il faut.",
+  "image": "tarte_citron.jpeg",
   "sizes": [
     {
       "price": 2.5,

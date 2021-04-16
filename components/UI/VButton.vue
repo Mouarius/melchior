@@ -1,5 +1,5 @@
 <template>
-  <button :class="size">
+  <button :class="`btn-${size}`" @click="clickHandler">
     <slot>Button</slot>
     <arrow v-if="arrow" style="height: 18px; transform: translateX(10px)" />
   </button>
@@ -8,6 +8,7 @@
 <script>
 import Arrow from '../shapes/Arrow'
 export default {
+  name: 'VButton',
   components: { Arrow },
   props: {
     size: {
@@ -17,6 +18,10 @@ export default {
     arrow: {
       type: Boolean,
       default: false,
+    },
+    clickHandler: {
+      type: Function,
+      default: () => {},
     },
   },
 }
@@ -29,8 +34,6 @@ $dark-blue: #1b2a46;
 button {
   cursor: pointer;
   font-family: 'Silka';
-  font-size: 18px;
-  padding: 8px 18px;
   outline: none;
   border: solid 1px $gold;
   border-radius: 999px;
@@ -48,5 +51,17 @@ button {
     stroke: $dark-blue;
     transform: translateX(3px);
   }
+}
+.btn-small {
+  height: 24px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 12px;
+}
+.btn-medium {
+  height: 40px;
+  padding-left: 18px;
+  padding-right: 18px;
+  font-size: 18px;
 }
 </style>

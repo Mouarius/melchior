@@ -14,13 +14,21 @@
       </ul>
       <div id="selector" :style="{ width: selectorWidth }"></div>
     </nav>
-    <div class="products-cards"></div>
+    <div class="products-cards">
+      <product-card
+        v-for="product in products"
+        :key="product.id"
+        :product="product"
+      />
+    </div>
   </section>
 </template>
 
 <script>
 import { gsap } from 'gsap'
+import ProductCard from './ProductCard'
 export default {
+  components: { ProductCard },
   data() {
     return {
       categories: [
@@ -37,7 +45,11 @@ export default {
           name: 'DESSERT/PÂTISSERIES',
         },
       ],
+      products: [],
     }
+  },
+  async fetch() {
+    this.products = await this.$content('products').fetch()
   },
   computed: {
     selectorWidth() {
@@ -49,8 +61,11 @@ export default {
     moveSelector(e) {
       e.preventDefault()
       const id = Number(e.target.id.slice(9))
-      const movePercentage = `${id * 100}%`
-      gsap.to('#selector', { x: movePercentage })
+      const movePercentage = id * 100
+      const tl = gsap.timeline({ duration: '1s' })
+      tl.to('#selector', {
+        x: movePercentage + '%',
+      })
     },
   },
 }
@@ -59,12 +74,8 @@ export default {
 <style lang="scss" scoped>
 $gold: #f2b44f;
 $dark-blue: #1b2a46;
-.products-cards {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+$grey-blue: #e7e9f3;
+
 #selector {
   height: 5px;
   background: $gold;
@@ -73,12 +84,15 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
 ul {
   display: grid;
   list-style: none;
   margin: 0;
   padding: 0;
   height: 50px;
+  font-size: 13px;
+
   li {
     text-align: center;
     font-weight: 600;
@@ -86,6 +100,25 @@ ul {
     align-items: center;
     justify-content: center;
     flex-grow: 1;
+  }
+}
+.products-cards {
+  display: grid;
+  padding: 0px;
+  padding-top: 15px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+@media screen and (min-width: 615px) {
+  .products-cards {
+    padding: 15px;
+  }
+
+  ul {
+    font-size: 16px;
+  }
+  .products-cards {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 </style>
