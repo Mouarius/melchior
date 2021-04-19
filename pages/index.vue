@@ -17,17 +17,39 @@
           <v-button :arrow="true">COMMANDER </v-button>
         </div>
       </section>
-      <products-list></products-list>
+      <products-list :set-modal-value="setModalValue" />
     </div>
+    <product-modal
+      v-if="isModalVisible"
+      :product="modalValue"
+      :close-modal="closeModal"
+    />
   </div>
 </template>
 
 <script>
+import ProductModal from '~/components/ProductModal.vue'
 import ProductsList from '~/components/ProductsList.vue'
 import VButton from '~/components/UI/VButton.vue'
 import VHeader from '~/components/VHeader.vue'
 export default {
-  components: { VButton, VHeader, ProductsList },
+  components: { VButton, VHeader, ProductsList, ProductModal },
+  data() {
+    return {
+      isModalVisible: false,
+      modalValue: null,
+    }
+  },
+  methods: {
+    setModalValue(product) {
+      console.log('Set modal value :', product)
+      this.modalValue = product
+      this.isModalVisible = true
+    },
+    closeModal() {
+      this.isModalVisible = false
+    },
+  },
 }
 </script>
 

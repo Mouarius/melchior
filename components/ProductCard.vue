@@ -1,12 +1,11 @@
 <template>
-  <div class="product">
+  <div class="product-card" :class="classObject()">
     <img
       class="product-image"
       :src="require('../assets/images/products/' + product.image)"
       :alt="product.id"
     />
-
-    <div class="product-description">
+    <div class="product-description" :class="classObject()">
       <header>
         <h1>{{ product.title }}</h1>
         <h2>{{ product.subtitle }}</h2>
@@ -15,7 +14,7 @@
         <ul>
           <li v-for="size in product.sizes" :key="size.quantity">
             <input
-              v-if="isModalShown"
+              v-if="cardSize === 'large'"
               :id="product.id + '_' + product.quantity"
               type="radio"
               name="size"
@@ -26,7 +25,18 @@
         </ul>
       </div>
       <footer>
-        <v-button size="small" :click-handler="showModal">COMMANDER</v-button>
+        <v-button
+          v-if="cardSize === 'medium'"
+          size="small"
+          :click-handler="() => setModalValue(product)"
+          >COMMANDER</v-button
+        >
+        <v-button
+          v-else-if="cardSize === 'large'"
+          size="small"
+          :click-handler="commandProduct"
+          >COMMANDER</v-button
+        >
       </footer>
     </div>
   </div>
@@ -52,11 +62,14 @@ export default {
         }
       },
     },
-  },
-  data() {
-    return {
-      isModalShown: false,
-    }
+    cardSize: {
+      type: String,
+      default: 'medium',
+    },
+    setModalValue: {
+      type: Function,
+      default: () => {},
+    },
   },
   methods: {
     formatPrice(number) {
@@ -72,9 +85,19 @@ export default {
         return `(${quantity} personnes)`
       }
     },
+    classObject() {
+      return {
+        small: this.cardSize === 'small',
+        medium: this.cardSize === 'medium',
+        large: this.cardSize === 'large',
+      }
+    },
     showModal() {
-      console.log('Showing modal')
-      this.isModalShown = true
+      this.isModalVisible = true
+      console.log('Show Modal')
+    },
+    commandProduct() {
+      console.log('Command Product')
     },
   },
 }
@@ -83,9 +106,10 @@ export default {
 <style lang="scss" scoped>
 $gold: #f2b44f;
 $dark-blue: #1b2a46;
+$soft-blue: #324566;
 $grey-blue: #e7e9f3;
 
-.product {
+.product-card {
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -96,6 +120,16 @@ $grey-blue: #e7e9f3;
   width: 100%;
   object-fit: cover;
 }
+// .large {
+//   .product-description {
+//     background: white;
+//     color: $dark-blue;
+//     h2,
+//     em {
+//       color: $soft-blue;
+//     }
+//   }
+// }
 .product-description {
   background: $dark-blue;
   color: white;
@@ -113,43 +147,33 @@ $grey-blue: #e7e9f3;
     font-weight: 500;
     color: $grey-blue;
   }
-}
-footer {
-  display: flex;
-  align-items: baseline;
-  justify-content: flex-end;
-}
-.price {
-  font-size: 26px;
-  font-weight: 600;
-  margin-right: 8px;
-}
-ul {
-  list-style: none;
-  padding: 0;
-  font-size: 12px;
-  padding-left: 10px;
-  li {
-    margin: 0;
-    margin-bottom: 2px;
+  footer {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-end;
   }
-}
-input[type='radio'] {
-  height: 12px;
-  outline: none;
-  border: none;
-}
-em {
-  font-style: normal;
-  color: $grey-blue;
-}
-strong {
-  font-size: 14px;
-  font-weight: 500;
-}
-.modal-version {
-  .product-description {
-    background: white;
+  ul {
+    list-style: none;
+    padding: 0;
+    font-size: 12px;
+    padding-left: 10px;
+    li {
+      margin: 0;
+      margin-bottom: 2px;
+    }
+  }
+  input[type='radio'] {
+    height: 12px;
+    outline: none;
+    border: none;
+  }
+  em {
+    font-style: normal;
+    color: $grey-blue;
+  }
+  strong {
+    font-size: 14px;
+    font-weight: 500;
   }
 }
 </style>

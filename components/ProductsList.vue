@@ -19,6 +19,8 @@
         v-for="product in products"
         :key="product.id"
         :product="product"
+        card-size="medium"
+        :set-modal-value="setModalValue"
       />
     </div>
   </section>
@@ -28,7 +30,9 @@
 import { gsap } from 'gsap'
 import ProductCard from './ProductCard'
 export default {
+  name: 'ProductsList',
   components: { ProductCard },
+  props: ['setModalValue'],
   data() {
     return {
       categories: [
@@ -46,6 +50,8 @@ export default {
         },
       ],
       products: [],
+      isModalVisible: false,
+      modalProduct: null,
     }
   },
   async fetch() {
