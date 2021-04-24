@@ -3,6 +3,7 @@
   "title": "Tarte au chocolat",
   "subtitle": "De la gourmandise à l'état pur.",
   "image": "tarte_chocolat.jpeg",
+  "categories": ["patisserie"],
   "sizes": [
     {
       "price": 2.5,

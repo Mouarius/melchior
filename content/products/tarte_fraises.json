@@ -3,6 +3,7 @@
   "title": "Tarte aux fraises",
   "subtitle": "Un délice de fruits frais",
   "image": "tarte_fraises.jpeg",
+  "categories": ["patisserie"],
   "sizes": [
     {
       "price": 2.5,

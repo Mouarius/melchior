@@ -6,17 +6,21 @@
           gridTemplateColumns: `repeat(${categories.length}, 1fr)`,
         }"
       >
-        <li v-for="category in categories" :key="category.id">
-          <a :id="'category-' + category.id" href="#" @click="moveSelector">{{
-            category.name
-          }}</a>
+        <li v-for="(category, index) in categories" :key="index">
+          <a
+            :id="'category-' + category.id"
+            :class="category.id"
+            href="#"
+            @click="changeCategory($event, index)"
+            >{{ category.name }}</a
+          >
         </li>
       </ul>
       <div id="selector" :style="{ width: selectorWidth }"></div>
     </nav>
     <div class="products-cards">
       <product-card
-        v-for="product in products"
+        v-for="product in filteredProducts"
         :key="product.id"
         :product="product"
         card-size="medium"
@@ -37,21 +41,22 @@ export default {
     return {
       categories: [
         {
-          id: '0',
+          id: 'casse_croute',
           name: 'CASSE-CROÛTE',
         },
         {
-          id: '1',
+          id: 'boulangerie',
           name: 'PAIN/VIENNOISERIES',
         },
         {
-          id: '2',
+          id: 'patisserie',
           name: 'DESSERT/PÂTISSERIES',
         },
       ],
       products: [],
       isModalVisible: false,
       modalProduct: null,
+      selectedCategory: '',
     }
   },
   async fetch() {
@@ -62,16 +67,26 @@ export default {
       const width = 100 / this.categories.length
       return `${width}%`
     },
+    filteredProducts() {
+      return this.products.filter(
+        (product) => product.categories[0] === this.selectedCategory
+      )
+    },
   },
   methods: {
-    moveSelector(e) {
-      e.preventDefault()
-      const id = Number(e.target.id.slice(9))
-      const movePercentage = id * 100
+    moveSelector(toIndex) {
+      const movePercentage = toIndex * 100
       const tl = gsap.timeline({ duration: '1s' })
       tl.to('#selector', {
         x: movePercentage + '%',
       })
+    },
+    changeCategory(event, index) {
+      const id = this.categories[index].id
+      this.selectedCategory = id
+      event.preventDefault()
+      this.moveSelector(index)
+      console.log('Selected category : ', this.selectedCategory)
     },
   },
 }
