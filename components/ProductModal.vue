@@ -5,7 +5,7 @@
       :product="product"
       card-size="large"
     />
-    <button @click="closeModal">close</button>
+    <button class="close-button" @click="closeModal">close</button>
   </div>
 </template>
 
@@ -20,7 +20,10 @@ export default {
 
 <style lang="scss">
 $dark-blue: #1b2a46;
-
+.close-button {
+  position: absolute;
+  top: 0;
+}
 .product-modal {
   position: fixed;
   bottom: 0;

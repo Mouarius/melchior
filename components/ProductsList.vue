@@ -125,10 +125,22 @@ ul {
 }
 .products-cards {
   display: grid;
-  padding: 0px;
+  padding: 24px;
   padding-top: 15px;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   gap: 15px;
+}
+@media screen and (min-width: 425px) {
+  .products-cards {
+    padding: 15px;
+  }
+
+  ul {
+    font-size: 14px;
+  }
+  .products-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 @media screen and (min-width: 615px) {
   .products-cards {

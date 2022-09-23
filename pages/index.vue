@@ -73,7 +73,8 @@ $grey-blue: #e7e9f3;
 
 .information {
   display: grid;
-  grid-template-columns: 2fr 3fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: 2fr;
 }
 .card {
   padding: 20px;
@@ -110,6 +111,12 @@ $grey-blue: #e7e9f3;
 }
 section {
   background: white;
+}
+@media screen and (min-width: 425px) {
+  .information {
+    grid-template-columns: 2fr 3fr;
+    grid-template-rows: 1fr;
+  }
 }
 @media screen and (min-width: 768px) {
   section {

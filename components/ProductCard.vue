@@ -1,11 +1,11 @@
 <template>
-  <div class="product-card" :class="classObject()">
+  <div class="product-card" :class="cardSize">
     <img
       class="product-image"
       :src="require('../assets/images/products/' + product.image)"
       :alt="product.id"
     />
-    <div class="product-description" :class="classObject()">
+    <div class="product-description">
       <header>
         <h1>{{ product.title }}</h1>
         <h2>{{ product.subtitle }}</h2>
@@ -120,6 +120,13 @@ $grey-blue: #e7e9f3;
   width: 100%;
   object-fit: cover;
 }
+.large {
+  height: 80vh;
+  max-height: 360px;
+  width: 95vw;
+  max-width: 300px;
+  min-width: 260px;
+}
 // .large {
 //   .product-description {
 //     background: white;
@@ -137,7 +144,8 @@ $grey-blue: #e7e9f3;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 180px;
+  height: 100%;
+  min-height: 180px;
   h1 {
     font-size: 18px;
     font-weight: 600;
